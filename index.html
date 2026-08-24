@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FlowChart Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="logo">◆</span><span class="brandtext">FlowChart <b>Studio</b></span></div>
+
+  <nav class="menus">
+    <div class="menu">
+      <button class="menu-trigger" data-menu="file">File</button>
+      <div class="menu-dropdown" data-dropdown="file">
+        <button data-action="new">New diagram <span class="mkey">Ctrl+N</span></button>
+        <button data-action="open">Open… <span class="mkey">Ctrl+O</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="save">Save <span class="mkey">Ctrl+S</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="exportJson">Export as JSON</button>
+        <button data-action="exportSvg">Export as SVG</button>
+        <button data-action="exportPng">Export as PNG</button>
+        <button data-action="exportPdf">Export as PDF</button>
+        <button data-action="exportDoc">Export as Word (.doc)</button>
+      </div>
+    </div>
+
+    <div class="menu">
+      <button class="menu-trigger" data-menu="edit">Edit</button>
+      <div class="menu-dropdown" data-dropdown="edit">
+        <button data-action="undo">Undo <span class="mkey">Ctrl+Z</span></button>
+        <button data-action="redo">Redo <span class="mkey">Ctrl+Y</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="cut">Cut <span class="mkey">Ctrl+X</span></button>
+        <button data-action="copy">Copy <span class="mkey">Ctrl+C</span></button>
+        <button data-action="paste">Paste <span class="mkey">Ctrl+V</span></button>
+        <button data-action="duplicate">Duplicate <span class="mkey">Ctrl+D</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="selectAll">Select all <span class="mkey">Ctrl+A</span></button>
+        <button data-action="delete">Delete <span class="mkey">Del</span></button>
+      </div>
+    </div>
+
+    <div class="menu">
+      <button class="menu-trigger" data-menu="view">View</button>
+      <div class="menu-dropdown" data-dropdown="view">
+        <button data-action="zoomIn">Zoom in <span class="mkey">Ctrl+=</span></button>
+        <button data-action="zoomOut">Zoom out <span class="mkey">Ctrl+-</span></button>
+        <button data-action="zoomActual">Zoom to 100%</button>
+        <button data-action="fit">Zoom to fit <span class="mkey">Shift+1</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="toggleGrid">Toggle grid</button>
+        <button data-action="toggleMinimap">Toggle minimap</button>
+      </div>
+    </div>
+
+    <div class="menu">
+      <button class="menu-trigger" data-menu="arrange">Arrange</button>
+      <div class="menu-dropdown" data-dropdown="arrange">
+        <button data-action="bringFront">Bring to front <span class="mkey">]</span></button>
+        <button data-action="bringForward">Bring forward</button>
+        <button data-action="sendBackward">Send backward</button>
+        <button data-action="sendBack">Send to back <span class="mkey">[</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="alignLeft">Align left</button>
+        <button data-action="alignCenterH">Align center</button>
+        <button data-action="alignRight">Align right</button>
+        <div class="menu-sep"></div>
+        <button data-action="alignTop">Align top</button>
+        <button data-action="alignMiddle">Align middle</button>
+        <button data-action="alignBottom">Align bottom</button>
+        <div class="menu-sep"></div>
+        <button data-action="distributeH">Distribute horizontally</button>
+        <button data-action="distributeV">Distribute vertically</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="tools">
+    <button data-action="undo" title="Undo (Ctrl+Z)">↶</button>
+    <button data-action="redo" title="Redo (Ctrl+Y)">↷</button>
+    <span class="sep"></span>
+    <button data-action="zoomOut" title="Zoom out">−</button>
+    <span id="zoom">100%</span>
+    <button data-action="zoomIn" title="Zoom in">+</button>
+    <button data-action="fit" title="Zoom to fit">Fit</button>
+    <span class="sep"></span>
+    <button data-action="save" title="Save locally">Save</button>
+    <button data-action="exportJson" class="primary" title="Export JSON">Export</button>
+  </div>
+</header>
+
+<div class="main">
+  <aside class="left">
+    <div class="panelTitle">Shapes</div>
+    <input id="search" class="search" placeholder="Search shapes">
+
+    <div class="group">
+      <div class="groupTitle">Flowchart</div>
+      <div class="palette">
+        <div draggable="true" data-type="start" class="item"><i class="s start"></i>Start / End</div>
+        <div draggable="true" data-type="process" class="item"><i class="s process"></i>Process</div>
+        <div draggable="true" data-type="decision" class="item"><i class="s decision"></i>Decision</div>
+        <div draggable="true" data-type="data" class="item"><i class="s data"></i>Data</div>
+        <div draggable="true" data-type="document" class="item"><i class="s document"></i>Document</div>
+        <div draggable="true" data-type="database" class="item"><i class="s database"></i>Database</div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="groupTitle">Basic</div>
+      <div class="palette">
+        <div draggable="true" data-type="circle" class="item"><i class="s circle"></i>Circle</div>
+        <div draggable="true" data-type="hexagon" class="item"><i class="s hexagon"></i>Hexagon</div>
+        <div draggable="true" data-type="parallelogram" class="item"><i class="s data"></i>Parallelogram</div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <b>Quick tips</b><br>
+      Drag shapes onto the canvas.<br>
+      Hover a shape and drag a blue dot to connect.<br>
+      Drag a corner handle to resize.<br>
+      Shift-click to multi-select.<br>
+      Double-click text to edit.
+    </div>
+  </aside>
+
+  <section id="wrap" class="wrap">
+    <div id="canvas" class="canvas">
+      <svg id="svg">
+        <defs>
+          <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L8,3.5 z"></path>
+          </marker>
+        </defs>
+      </svg>
+      <div id="layer"></div>
+    </div>
+    <div id="empty">Drag a shape here to start</div>
+    <div class="minimap" id="minimap">
+      <div id="miniNodes"></div>
+      <div id="miniView"></div>
+    </div>
+  </section>
+
+  <aside class="right">
+    <div class="panelTitle">Properties</div>
+    <div id="props" class="disabled">
+      <label>Text<textarea id="pText"></textarea></label>
+      <div class="two"><label>Width<input id="pW" type="number"></label><label>Height<input id="pH" type="number"></label></div>
+      <div class="two"><label>X<input id="pX" type="number"></label><label>Y<input id="pY" type="number"></label></div>
+      <div class="two">
+        <label>Fill<input id="pFill" type="color"></label>
+        <label>Border<input id="pBorder" type="color"></label>
+      </div>
+      <div class="two"><label>Font<input id="pFont" type="number" min="8" max="60"></label><label>Line<input id="pLine" type="number" min="1" max="10"></label></div>
+      <div class="buttonRow">
+        <button data-action="duplicate">Duplicate</button>
+        <button data-action="delete" class="danger">Delete</button>
+      </div>
+      <button data-action="bringFront" class="wide">Bring to front</button>
+      <button data-action="sendBack" class="wide">Send to back</button>
+    </div>
+    <div class="footerHint" id="footerHint">Nothing selected</div>
+  </aside>
+</div>
+
+<footer>
+  <span id="status">Ready</span>
+  <span>FlowChart Studio • Local</span>
+</footer>
+
+<input id="file" type="file" accept=".json" hidden>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
