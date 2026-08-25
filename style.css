@@ -149,7 +149,14 @@ button{cursor:pointer}
   background-size:20px 20px;
 }
 .wrap.no-grid{background-image:none}
-.canvas{position:absolute;width:6000px;height:6000px;transform-origin:0 0}
+.canvas{
+  position:absolute;
+  width:6000px;
+  height:6000px;
+  transform-origin:0 0;
+  background-color:var(--white);
+  transition:background-color .2s ease;
+}
 #rowLayer{position:absolute;inset:0;pointer-events:none;z-index:0}
 .rowBand{position:absolute;transition:background-color .15s ease}
 .canvas svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
