@@ -13,6 +13,10 @@
   --shadow-sm:0 1px 2px rgba(20,25,40,.06);
   --shadow-md:0 4px 14px rgba(20,25,40,.10);
   --shadow-lg:0 10px 30px rgba(20,25,40,.16);
+
+  /* Row Band Colors per Level */
+  --row-1: #111111;
+  --row-2: #4472C4;
 }
 
 *{box-sizing:border-box}
@@ -157,13 +161,44 @@ button{cursor:pointer}
   background-color:var(--white);
   transition:background-color .2s ease;
 }
-#rowLayer{position:absolute;inset:0;pointer-events:none;z-index:0}
-.rowBand{position:absolute;transition:background-color .15s ease}
-.canvas svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.canvas svg path.edge{fill:none;stroke:#94a3b8;stroke-width:1.75;marker-end:none;transition:stroke .1s ease}
-.canvas svg path.edge:hover,.canvas svg path.edge.selected{stroke:var(--blue)}
-.canvas svg path.temp{fill:none;stroke:var(--blue);stroke-width:1.75;stroke-dasharray:6 5}
-#arrow path{fill:#64748B}
+
+/* ROW BANDS STYLING (PER LEVEL) */
+#rowLayer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  display:none; /* Disabled by default, enabled via toggle */
+}
+body.show-row-bands #rowLayer{
+  display:block;
+}
+
+/* Sample 2 levels based on image */
+#rowLayer::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  height: 200px;
+  background-color: var(--row-1);
+  border-radius: 28px;
+}
+
+#rowLayer::after {
+  content: "";
+  position: absolute;
+  top: 260px;
+  left: 40px;
+  right: 40px;
+  height: 220px;
+  background-color: var(--row-2);
+  border-radius: 28px;
+}
+
+.canvas svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1}
+#layer{position:relative;z-index:2}
 
 .node{
   position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;
