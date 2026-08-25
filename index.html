@@ -152,6 +152,20 @@
 
   <aside class="right">
     <div class="panelTitle">Properties</div>
+
+    <!-- CANVAS BACKGROUND COLOR SETTINGS -->
+    <div style="padding: 10px; border-bottom: 1px solid #e0e0e0; margin-bottom: 10px;">
+      <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; cursor: pointer;">
+        Canvas Background:
+        <input id="canvasBgPicker" type="color" value="#ffffff" onchange="document.getElementById('canvas').style.backgroundColor = this.value" style="cursor: pointer; width: 32px; height: 32px; border: none; background: none;">
+      </label>
+      <div style="margin-top: 6px; display: flex; gap: 5px;">
+        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#ffffff'; document.getElementById('canvasBgPicker').value='#ffffff';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">White</button>
+        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#f0f4f8'; document.getElementById('canvasBgPicker').value='#f0f4f8';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">Soft Blue</button>
+        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#fdfbf7'; document.getElementById('canvasBgPicker').value='#fdfbf7';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">Cream</button>
+      </div>
+    </div>
+
     <div id="props" class="disabled">
       <label>Text<textarea id="pText"></textarea></label>
       <div class="two"><label>Width<input id="pW" type="number"></label><label>Height<input id="pH" type="number"></label></div>
