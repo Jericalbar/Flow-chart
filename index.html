@@ -153,17 +153,18 @@
   <aside class="right">
     <div class="panelTitle">Properties</div>
 
-    <!-- CANVAS BACKGROUND COLOR SETTINGS -->
-    <div style="padding: 10px; border-bottom: 1px solid #e0e0e0; margin-bottom: 10px;">
-      <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; cursor: pointer;">
-        Canvas Background:
-        <input id="canvasBgPicker" type="color" value="#ffffff" onchange="document.getElementById('canvas').style.backgroundColor = this.value" style="cursor: pointer; width: 32px; height: 32px; border: none; background: none;">
-      </label>
-      <div style="margin-top: 6px; display: flex; gap: 5px;">
-        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#ffffff'; document.getElementById('canvasBgPicker').value='#ffffff';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">White</button>
-        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#f0f4f8'; document.getElementById('canvasBgPicker').value='#f0f4f8';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">Soft Blue</button>
-        <button type="button" onclick="document.getElementById('canvas').style.backgroundColor='#fdfbf7'; document.getElementById('canvasBgPicker').value='#fdfbf7';" style="font-size: 11px; padding: 2px 6px; cursor: pointer;">Cream</button>
+    <!-- LEVEL / ROW BANDS SECTION -->
+    <div style="padding: 10px; border-bottom: 1px solid var(--border-soft); margin-bottom: 12px; background: var(--bg-canvas); border-radius: 8px;">
+      <span style="font-size: 11.5px; font-weight: 700; color: var(--ink); display: block; margin-bottom: 6px;">Level Backgrounds</span>
+      <div class="two" style="margin-bottom: 6px;">
+        <label>Level 1 (Top)
+          <input type="color" value="#111111" onchange="document.documentElement.style.setProperty('--row-1', this.value)">
+        </label>
+        <label>Level 2 (Mid)
+          <input type="color" value="#4472C4" onchange="document.documentElement.style.setProperty('--row-2', this.value)">
+        </label>
       </div>
+      <button type="button" class="wide" style="margin-top:0; font-size: 11px; padding: 5px;" onclick="document.body.classList.toggle('show-row-bands')">Toggle Level Colors</button>
     </div>
 
     <div id="props" class="disabled">
