@@ -693,51 +693,6 @@ $("file").onchange = e => {
 };
 function saveLocal() { localStorage.setItem("flowchartV2", JSON.stringify({ nodes, edges, zoom })); status("Saved locally"); }
 
-/* ---------------- Excel export ---------------- */
-function exportExcel() {
-  if (!nodes.length) return status("Nothing to export");
-  if (!window.XLSX) {
-    alert("Excel export needs an internet connection because the XLSX library is loaded from a CDN.");
-    return;
-  }
-
-  const nodeRows = nodes.map(n => ({
-    ID: n.id,
-    Type: n.type,
-    Text: n.text || "",
-    X: n.x,
-    Y: n.y,
-    Width: n.w,
-    Height: n.h,
-    Fill: n.fill,
-    Border: n.border,
-    Font: n.font,
-    Line: n.line
-  }));
-
-  const edgeRows = edges.map((e, i) => ({
-    ID: i + 1,
-    From: e.a,
-    To: e.b
-  }));
-
-  const wb = XLSX.utils.book_new();
-  const nodesSheet = XLSX.utils.json_to_sheet(nodeRows);
-  const edgesSheet = XLSX.utils.json_to_sheet(edgeRows);
-
-  nodesSheet["!cols"] = [
-    { wch: 10 }, { wch: 16 }, { wch: 32 }, { wch: 10 }, { wch: 10 },
-    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 12 }, { wch: 8 }, { wch: 8 }
-  ];
-  edgesSheet["!cols"] = [{ wch: 8 }, { wch: 12 }, { wch: 12 }];
-
-  XLSX.utils.book_append_sheet(wb, nodesSheet, "Shapes");
-  XLSX.utils.book_append_sheet(wb, edgesSheet, "Connections");
-
-  XLSX.writeFile(wb, "flowchart.xlsx");
-  status("Excel exported");
-}
-
 /* ---------------- export ---------------- */
 function download(filename, blob) {
   const a = document.createElement("a");
@@ -937,7 +892,7 @@ function toggleMinimap() { minimapOn = !minimapOn; $("minimap").classList.toggle
 /* ---------------- actions registry (wires menu + toolbar buttons) ---------------- */
 const actions = {
   new: newDiagram, open: openDiagram, save: saveLocal, insertImage: () => insertImage(),
-  exportJson, exportExcel, exportSvg, exportPng, exportPdf, exportDoc,
+  exportJson, exportSvg, exportPng, exportPdf, exportDoc,
   undo, redo, cut: cutSelection, copy: copySelection, paste: pasteClipboard,
   duplicate: duplicateSelection, selectAll, delete: deleteSelection,
   zoomIn: () => setZoom(zoom + .1), zoomOut: () => setZoom(zoom - .1),
